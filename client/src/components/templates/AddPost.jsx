@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 import { getCategory } from "../../services/admin";
 import styles from "./AddPost.module.css";
@@ -41,8 +42,11 @@ function AddPost() {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((res) => console.log(res.data))
-      .catch((error) => console.log(error));
+      .then((res) => toast.success(res.data.message))
+      .catch((error) => {
+        toast.error("مشکلی پیش آمده است");
+        console.log(error);
+      });
   };
 
   return (
